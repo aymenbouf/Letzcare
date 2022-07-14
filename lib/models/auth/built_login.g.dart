@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth/built_login.dart';
+part of 'built_login.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

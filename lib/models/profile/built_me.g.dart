@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile/built_me.dart';
+part of 'built_me.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

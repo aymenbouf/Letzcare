@@ -1,8 +1,9 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:letzcqre/models/office/built_office.dart';
 
-part '../built_user.g.dart';
+part 'built_user.g.dart';
 
 
 abstract class UserModel implements Built<UserModel, UserModelBuilder> {
@@ -25,15 +26,17 @@ abstract class UserModel implements Built<UserModel, UserModelBuilder> {
   @BuiltValueField(wireName: 'occupation')
   String get occupation;
   @BuiltValueField(wireName: 'image')
-  String get image;
+  String? get image;
   @BuiltValueField(wireName: 'email_verified_at')
-  String get email_verified_at;
+  String? get email_verified_at;
   @BuiltValueField(wireName: 'created_at')
-  String get created_at;
+  String? get created_at;
   @BuiltValueField(wireName: 'updated_at')
-  String get updated_at;
+  String? get updated_at;
   @BuiltValueField(wireName: 'name')
-  String get name;
+  String? get name;
+  @BuiltValueField(wireName: 'office')
+  OfficeModel? get office;
   
   UserModel._();
 

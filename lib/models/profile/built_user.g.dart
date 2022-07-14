@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile/built_user.dart';
+part of 'built_user.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -44,22 +44,50 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
       'occupation',
       serializers.serialize(object.occupation,
           specifiedType: const FullType(String)),
-      'image',
-      serializers.serialize(object.image,
-          specifiedType: const FullType(String)),
-      'email_verified_at',
-      serializers.serialize(object.email_verified_at,
-          specifiedType: const FullType(String)),
-      'created_at',
-      serializers.serialize(object.created_at,
-          specifiedType: const FullType(String)),
-      'updated_at',
-      serializers.serialize(object.updated_at,
-          specifiedType: const FullType(String)),
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
     ];
-
+    Object? value;
+    value = object.image;
+    if (value != null) {
+      result
+        ..add('image')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.email_verified_at;
+    if (value != null) {
+      result
+        ..add('email_verified_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.created_at;
+    if (value != null) {
+      result
+        ..add('created_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.updated_at;
+    if (value != null) {
+      result
+        ..add('updated_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.office;
+    if (value != null) {
+      result
+        ..add('office')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(OfficeModel)));
+    }
     return result;
   }
 
@@ -112,23 +140,27 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           break;
         case 'image':
           result.image = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'email_verified_at':
           result.email_verified_at = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'created_at':
           result.created_at = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'updated_at':
           result.updated_at = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'office':
+          result.office.replace(serializers.deserialize(value,
+              specifiedType: const FullType(OfficeModel))! as OfficeModel);
           break;
       }
     }
@@ -157,15 +189,17 @@ class _$UserModel extends UserModel {
   @override
   final String occupation;
   @override
-  final String image;
+  final String? image;
   @override
-  final String email_verified_at;
+  final String? email_verified_at;
   @override
-  final String created_at;
+  final String? created_at;
   @override
-  final String updated_at;
+  final String? updated_at;
   @override
-  final String name;
+  final String? name;
+  @override
+  final OfficeModel? office;
 
   factory _$UserModel([void Function(UserModelBuilder)? updates]) =>
       (new UserModelBuilder()..update(updates))._build();
@@ -180,11 +214,12 @@ class _$UserModel extends UserModel {
       required this.email,
       required this.position_held,
       required this.occupation,
-      required this.image,
-      required this.email_verified_at,
-      required this.created_at,
-      required this.updated_at,
-      required this.name})
+      this.image,
+      this.email_verified_at,
+      this.created_at,
+      this.updated_at,
+      this.name,
+      this.office})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'UserModel', 'id');
     BuiltValueNullFieldError.checkNotNull(
@@ -200,14 +235,6 @@ class _$UserModel extends UserModel {
         position_held, r'UserModel', 'position_held');
     BuiltValueNullFieldError.checkNotNull(
         occupation, r'UserModel', 'occupation');
-    BuiltValueNullFieldError.checkNotNull(image, r'UserModel', 'image');
-    BuiltValueNullFieldError.checkNotNull(
-        email_verified_at, r'UserModel', 'email_verified_at');
-    BuiltValueNullFieldError.checkNotNull(
-        created_at, r'UserModel', 'created_at');
-    BuiltValueNullFieldError.checkNotNull(
-        updated_at, r'UserModel', 'updated_at');
-    BuiltValueNullFieldError.checkNotNull(name, r'UserModel', 'name');
   }
 
   @override
@@ -234,7 +261,8 @@ class _$UserModel extends UserModel {
         email_verified_at == other.email_verified_at &&
         created_at == other.created_at &&
         updated_at == other.updated_at &&
-        name == other.name;
+        name == other.name &&
+        office == other.office;
   }
 
   @override
@@ -252,21 +280,23 @@ class _$UserModel extends UserModel {
                                             $jc(
                                                 $jc(
                                                     $jc(
-                                                        $jc(0, id.hashCode),
-                                                        medical_office_id
-                                                            .hashCode),
-                                                    first_name.hashCode),
-                                                last_name.hashCode),
-                                            personal_number.hashCode),
-                                        phone.hashCode),
-                                    email.hashCode),
-                                position_held.hashCode),
-                            occupation.hashCode),
-                        image.hashCode),
-                    email_verified_at.hashCode),
-                created_at.hashCode),
-            updated_at.hashCode),
-        name.hashCode));
+                                                        $jc(
+                                                            $jc(0, id.hashCode),
+                                                            medical_office_id
+                                                                .hashCode),
+                                                        first_name.hashCode),
+                                                    last_name.hashCode),
+                                                personal_number.hashCode),
+                                            phone.hashCode),
+                                        email.hashCode),
+                                    position_held.hashCode),
+                                occupation.hashCode),
+                            image.hashCode),
+                        email_verified_at.hashCode),
+                    created_at.hashCode),
+                updated_at.hashCode),
+            name.hashCode),
+        office.hashCode));
   }
 
   @override
@@ -285,7 +315,8 @@ class _$UserModel extends UserModel {
           ..add('email_verified_at', email_verified_at)
           ..add('created_at', created_at)
           ..add('updated_at', updated_at)
-          ..add('name', name))
+          ..add('name', name)
+          ..add('office', office))
         .toString();
   }
 }
@@ -353,6 +384,10 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  OfficeModelBuilder? _office;
+  OfficeModelBuilder get office => _$this._office ??= new OfficeModelBuilder();
+  set office(OfficeModelBuilder? office) => _$this._office = office;
+
   UserModelBuilder();
 
   UserModelBuilder get _$this {
@@ -372,6 +407,7 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
       _created_at = $v.created_at;
       _updated_at = $v.updated_at;
       _name = $v.name;
+      _office = $v.office?.toBuilder();
       _$v = null;
     }
     return this;
@@ -392,31 +428,44 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   UserModel build() => _build();
 
   _$UserModel _build() {
-    final _$result = _$v ??
-        new _$UserModel._(
-            id: BuiltValueNullFieldError.checkNotNull(id, r'UserModel', 'id'),
-            medical_office_id: BuiltValueNullFieldError.checkNotNull(
-                medical_office_id, r'UserModel', 'medical_office_id'),
-            first_name: BuiltValueNullFieldError.checkNotNull(
-                first_name, r'UserModel', 'first_name'),
-            last_name: BuiltValueNullFieldError.checkNotNull(
-                last_name, r'UserModel', 'last_name'),
-            personal_number: BuiltValueNullFieldError.checkNotNull(
-                personal_number, r'UserModel', 'personal_number'),
-            phone: BuiltValueNullFieldError.checkNotNull(
-                phone, r'UserModel', 'phone'),
-            email: BuiltValueNullFieldError.checkNotNull(
-                email, r'UserModel', 'email'),
-            position_held: BuiltValueNullFieldError.checkNotNull(
-                position_held, r'UserModel', 'position_held'),
-            occupation: BuiltValueNullFieldError.checkNotNull(
-                occupation, r'UserModel', 'occupation'),
-            image:
-                BuiltValueNullFieldError.checkNotNull(image, r'UserModel', 'image'),
-            email_verified_at: BuiltValueNullFieldError.checkNotNull(email_verified_at, r'UserModel', 'email_verified_at'),
-            created_at: BuiltValueNullFieldError.checkNotNull(created_at, r'UserModel', 'created_at'),
-            updated_at: BuiltValueNullFieldError.checkNotNull(updated_at, r'UserModel', 'updated_at'),
-            name: BuiltValueNullFieldError.checkNotNull(name, r'UserModel', 'name'));
+    _$UserModel _$result;
+    try {
+      _$result = _$v ??
+          new _$UserModel._(
+              id: BuiltValueNullFieldError.checkNotNull(id, r'UserModel', 'id'),
+              medical_office_id: BuiltValueNullFieldError.checkNotNull(
+                  medical_office_id, r'UserModel', 'medical_office_id'),
+              first_name: BuiltValueNullFieldError.checkNotNull(
+                  first_name, r'UserModel', 'first_name'),
+              last_name: BuiltValueNullFieldError.checkNotNull(
+                  last_name, r'UserModel', 'last_name'),
+              personal_number: BuiltValueNullFieldError.checkNotNull(
+                  personal_number, r'UserModel', 'personal_number'),
+              phone: BuiltValueNullFieldError.checkNotNull(
+                  phone, r'UserModel', 'phone'),
+              email: BuiltValueNullFieldError.checkNotNull(
+                  email, r'UserModel', 'email'),
+              position_held: BuiltValueNullFieldError.checkNotNull(
+                  position_held, r'UserModel', 'position_held'),
+              occupation: BuiltValueNullFieldError.checkNotNull(
+                  occupation, r'UserModel', 'occupation'),
+              image: image,
+              email_verified_at: email_verified_at,
+              created_at: created_at,
+              updated_at: updated_at,
+              name: name,
+              office: _office?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'office';
+        _office?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'UserModel', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

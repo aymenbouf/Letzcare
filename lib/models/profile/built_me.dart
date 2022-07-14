@@ -3,7 +3,7 @@ import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:letzcqre/models/profile/built_user.dart';
 
-part '../built_me.g.dart';
+part 'built_me.g.dart';
 
 
 abstract class MeModel implements Built<MeModel, MeModelBuilder> {
