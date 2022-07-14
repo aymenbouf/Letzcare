@@ -5,15 +5,7 @@ import 'package:letzcqre/models/office/built_office_staff.dart';
 
 part 'built_office.g.dart';
 
-abstract class OfficesResponse implements Built<OfficesResponse, OfficesResponseBuilder> {
 
-  BuiltList<OfficeModel?> get Offices; 
-  OfficesResponse._();
-
-  factory OfficesResponse([void Function(OfficesResponseBuilder)? updates]) =
-      _$OfficesResponse;
-  static Serializer<OfficesResponse> get serializer => _$officesResponseSerializer;
-}
 
 abstract class OfficeModel implements Built<OfficeModel, OfficeModelBuilder> {
   @BuiltValueField(wireName: 'id')
