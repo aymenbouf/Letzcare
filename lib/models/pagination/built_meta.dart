@@ -11,8 +11,6 @@ abstract class MetalinkModel implements Built<MetalinkModel, MetalinkModelBuilde
   String get label;
   @BuiltValueField(wireName: 'active')
   bool get active;
-  
-
   MetalinkModel._();
 
   factory MetalinkModel([void Function(MetalinkModelBuilder)? updates]) =
@@ -20,31 +18,29 @@ abstract class MetalinkModel implements Built<MetalinkModel, MetalinkModelBuilde
   static Serializer<MetalinkModel> get serializer => _$metalinkModelSerializer;
 }
 
-abstract class MetalinksResponse implements Built<MetalinksResponse, MetalinksResponseBuilder> {
-
-  BuiltList<MetalinkModel?> get Metalinks; 
- MetalinksResponse._();
-
-  factory MetalinksResponse([void Function(MetalinksResponseBuilder)? updates]) =
-      _$MetalinksResponse;
-  static Serializer<MetalinksResponse> get serializer => _$metalinksResponseSerializer;
-}
 
 abstract class MetaModel implements Built<MetaModel, MetaModelBuilder> {
   @BuiltValueField(wireName: 'current_page')
   int get current_page;
+
   @BuiltValueField(wireName: 'from')
   int get from;
+
   @BuiltValueField(wireName: 'last_page')
   int get last_page;
+
   @BuiltValueField(wireName: 'links')
-  MetalinksResponse get links;
+  BuiltList<MetalinkModel?> get links;
+
   @BuiltValueField(wireName: 'path')
   String get path;
-   @BuiltValueField(wireName: 'per_page')
+
+  @BuiltValueField(wireName: 'per_page')
   int get per_page;
+
   @BuiltValueField(wireName: 'to')
   int get to;
+
   @BuiltValueField(wireName: 'total')
   int get total;
   

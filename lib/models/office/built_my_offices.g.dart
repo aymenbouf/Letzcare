@@ -22,7 +22,8 @@ class _$MyofficesModelSerializer
     final result = <Object?>[
       'data',
       serializers.serialize(object.data,
-          specifiedType: const FullType(OfficesResponse)),
+          specifiedType: const FullType(
+              BuiltList, const [const FullType.nullable(OfficeModel)])),
       'links',
       serializers.serialize(object.links,
           specifiedType: const FullType(LinksModel)),
@@ -48,8 +49,9 @@ class _$MyofficesModelSerializer
       switch (key) {
         case 'data':
           result.data.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(OfficesResponse))!
-              as OfficesResponse);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType.nullable(OfficeModel)]))!
+              as BuiltList<Object?>);
           break;
         case 'links':
           result.links.replace(serializers.deserialize(value,
@@ -68,7 +70,7 @@ class _$MyofficesModelSerializer
 
 class _$MyofficesModel extends MyofficesModel {
   @override
-  final OfficesResponse data;
+  final BuiltList<OfficeModel?> data;
   @override
   final LinksModel links;
   @override
@@ -121,10 +123,10 @@ class MyofficesModelBuilder
     implements Builder<MyofficesModel, MyofficesModelBuilder> {
   _$MyofficesModel? _$v;
 
-  OfficesResponseBuilder? _data;
-  OfficesResponseBuilder get data =>
-      _$this._data ??= new OfficesResponseBuilder();
-  set data(OfficesResponseBuilder? data) => _$this._data = data;
+  ListBuilder<OfficeModel?>? _data;
+  ListBuilder<OfficeModel?> get data =>
+      _$this._data ??= new ListBuilder<OfficeModel?>();
+  set data(ListBuilder<OfficeModel?>? data) => _$this._data = data;
 
   LinksModelBuilder? _links;
   LinksModelBuilder get links => _$this._links ??= new LinksModelBuilder();

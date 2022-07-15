@@ -8,8 +8,6 @@ part of 'built_meta.dart';
 
 Serializer<MetalinkModel> _$metalinkModelSerializer =
     new _$MetalinkModelSerializer();
-Serializer<MetalinksResponse> _$metalinksResponseSerializer =
-    new _$MetalinksResponseSerializer();
 Serializer<MetaModel> _$metaModelSerializer = new _$MetaModelSerializer();
 
 class _$MetalinkModelSerializer implements StructuredSerializer<MetalinkModel> {
@@ -65,51 +63,6 @@ class _$MetalinkModelSerializer implements StructuredSerializer<MetalinkModel> {
   }
 }
 
-class _$MetalinksResponseSerializer
-    implements StructuredSerializer<MetalinksResponse> {
-  @override
-  final Iterable<Type> types = const [MetalinksResponse, _$MetalinksResponse];
-  @override
-  final String wireName = 'MetalinksResponse';
-
-  @override
-  Iterable<Object?> serialize(Serializers serializers, MetalinksResponse object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'Metalinks',
-      serializers.serialize(object.Metalinks,
-          specifiedType: const FullType(
-              BuiltList, const [const FullType.nullable(MetalinkModel)])),
-    ];
-
-    return result;
-  }
-
-  @override
-  MetalinksResponse deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new MetalinksResponseBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'Metalinks':
-          result.Metalinks.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType.nullable(MetalinkModel)
-              ]))! as BuiltList<Object?>);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
 class _$MetaModelSerializer implements StructuredSerializer<MetaModel> {
   @override
   final Iterable<Type> types = const [MetaModel, _$MetaModel];
@@ -130,7 +83,8 @@ class _$MetaModelSerializer implements StructuredSerializer<MetaModel> {
           specifiedType: const FullType(int)),
       'links',
       serializers.serialize(object.links,
-          specifiedType: const FullType(MetalinksResponse)),
+          specifiedType: const FullType(
+              BuiltList, const [const FullType.nullable(MetalinkModel)])),
       'path',
       serializers.serialize(object.path, specifiedType: const FullType(String)),
       'per_page',
@@ -170,8 +124,9 @@ class _$MetaModelSerializer implements StructuredSerializer<MetaModel> {
           break;
         case 'links':
           result.links.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(MetalinksResponse))!
-              as MetalinksResponse);
+              specifiedType: const FullType(BuiltList, const [
+                const FullType.nullable(MetalinkModel)
+              ]))! as BuiltList<Object?>);
           break;
         case 'path':
           result.path = serializers.deserialize(value,
@@ -303,101 +258,6 @@ class MetalinkModelBuilder
   }
 }
 
-class _$MetalinksResponse extends MetalinksResponse {
-  @override
-  final BuiltList<MetalinkModel?> Metalinks;
-
-  factory _$MetalinksResponse(
-          [void Function(MetalinksResponseBuilder)? updates]) =>
-      (new MetalinksResponseBuilder()..update(updates))._build();
-
-  _$MetalinksResponse._({required this.Metalinks}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        Metalinks, r'MetalinksResponse', 'Metalinks');
-  }
-
-  @override
-  MetalinksResponse rebuild(void Function(MetalinksResponseBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  MetalinksResponseBuilder toBuilder() =>
-      new MetalinksResponseBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is MetalinksResponse && Metalinks == other.Metalinks;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, Metalinks.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'MetalinksResponse')
-          ..add('Metalinks', Metalinks))
-        .toString();
-  }
-}
-
-class MetalinksResponseBuilder
-    implements Builder<MetalinksResponse, MetalinksResponseBuilder> {
-  _$MetalinksResponse? _$v;
-
-  ListBuilder<MetalinkModel?>? _Metalinks;
-  ListBuilder<MetalinkModel?> get Metalinks =>
-      _$this._Metalinks ??= new ListBuilder<MetalinkModel?>();
-  set Metalinks(ListBuilder<MetalinkModel?>? Metalinks) =>
-      _$this._Metalinks = Metalinks;
-
-  MetalinksResponseBuilder();
-
-  MetalinksResponseBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _Metalinks = $v.Metalinks.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(MetalinksResponse other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$MetalinksResponse;
-  }
-
-  @override
-  void update(void Function(MetalinksResponseBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  MetalinksResponse build() => _build();
-
-  _$MetalinksResponse _build() {
-    _$MetalinksResponse _$result;
-    try {
-      _$result = _$v ?? new _$MetalinksResponse._(Metalinks: Metalinks.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'Metalinks';
-        Metalinks.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'MetalinksResponse', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
 class _$MetaModel extends MetaModel {
   @override
   final int current_page;
@@ -406,7 +266,7 @@ class _$MetaModel extends MetaModel {
   @override
   final int last_page;
   @override
-  final MetalinksResponse links;
+  final BuiltList<MetalinkModel?> links;
   @override
   final String path;
   @override
@@ -507,10 +367,10 @@ class MetaModelBuilder implements Builder<MetaModel, MetaModelBuilder> {
   int? get last_page => _$this._last_page;
   set last_page(int? last_page) => _$this._last_page = last_page;
 
-  MetalinksResponseBuilder? _links;
-  MetalinksResponseBuilder get links =>
-      _$this._links ??= new MetalinksResponseBuilder();
-  set links(MetalinksResponseBuilder? links) => _$this._links = links;
+  ListBuilder<MetalinkModel?>? _links;
+  ListBuilder<MetalinkModel?> get links =>
+      _$this._links ??= new ListBuilder<MetalinkModel?>();
+  set links(ListBuilder<MetalinkModel?>? links) => _$this._links = links;
 
   String? _path;
   String? get path => _$this._path;
