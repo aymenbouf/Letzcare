@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519394515243",
+    "project_id": "letzcare-app",
+    "storage_bucket": "letzcare-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519394515243:android:86897458bb28244c0ccd6e",
+        "android_client_info": {
+          "package_name": "com.letzcare.app.letzcqre"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519394515243-r54b8vc1f5p88rvkhg5obpv4ba8viaeq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFYeoWHd3D515XRiMZhPjPsn38zRni7A8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519394515243-r54b8vc1f5p88rvkhg5obpv4ba8viaeq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
