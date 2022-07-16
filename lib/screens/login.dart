@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:letzcqre/models/auth/built_login.dart';
+import 'package:letzcqre/network/chopper_api.dart';
+import 'package:letzcqre/screens/offices.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -96,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    //login();
+                    login();
                   },
                   child: Container(
                     height: 50,
@@ -128,5 +137,39 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  void login() async {
+    if(_formKey.currentState!.validate()){
+      setState(() {
+        loading = true;
+      });
+      fcm_token = await FirebaseMessaging.instance.getToken();
+      final authbody = AuthModel(
+            (b) => b
+          ..email = email
+          ..password = password
+          ..fcm_token = fcm_token,
+      );
+      var res = await Provider.of<Chopper_Api>(context,listen: false).login(authbody);
+      if (res.statusCode == 200){
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('access_token', res.body!.access_token);
+        var user = jsonDecode(res.bodyString)['user'];
+        localStorage.setString('user', json.encode(jsonDecode(res.bodyString)['user']));
+        setState(() {
+          loading = false;
+        });
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const OfficesScreen()));
+      }else{
+        if (res.statusCode == 404){
+          Fluttertoast.showToast(
+              msg: "Mot de passe ou email incorrecte",
+              backgroundColor: Colors.redAccent,
+              fontSize: 18);
+        }
+      }
+    }
+  }
+
 }
 

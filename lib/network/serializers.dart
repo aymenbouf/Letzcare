@@ -27,7 +27,8 @@ part 'serializers.g.dart';
   DataModel,
   OfficeConnectionResponse,
   LogoutModel,
-  LoginModel
+  LoginModel,
+  AuthModel
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

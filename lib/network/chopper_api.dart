@@ -1,5 +1,6 @@
 import 'dart:convert';
 import "dart:async";
+import 'package:letzcqre/models/auth/built_login.dart';
 import 'package:letzcqre/models/office/built_connect_office.dart';
 import 'package:letzcqre/models/office/built_my_offices.dart';
 import 'package:letzcqre/models/profile/built_me.dart';
@@ -12,18 +13,26 @@ part 'chopper_api.chopper.dart';
 abstract class Chopper_Api extends ChopperService {
   @Get(path: 'profile')
   Future<Response<MeModel>> getMe(@Header('Authorization') String token);
+
   @Get(path: 'my-offices')
   Future<Response<MyofficesModel>> getMyOffices(@Header('Authorization') String token);
+
   @Get(path: 'offices/{id}/connect')
   Future<Response<OfficeConnectionResponse>> getConnOffice(
       @Path('id') int id, @Header('Authorization') String token);
+
   @Get(path: 'offices/disconnect')
   Future<Response<OfficeConnectionResponse>> getDisConnOffice(
-       @Header('Authorization') String token);    
+       @Header('Authorization') String token);
+
+  @Post(path: 'login')
+  Future<Response<LoginModel>> login(
+      @Body() AuthModel body,
+      );
 
   static Chopper_Api create() {
     final client = ChopperClient(
-        baseUrl: ' http://letzcare.dev-it.me/api/',
+        baseUrl: 'http://letzcare.dev-it.me/api/office/',
         services: [
           _$Chopper_Api(),
         ],
