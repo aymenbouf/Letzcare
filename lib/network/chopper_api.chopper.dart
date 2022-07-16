@@ -15,4 +15,51 @@ class _$Chopper_Api extends Chopper_Api {
 
   @override
   final definitionType = Chopper_Api;
+
+  @override
+  Future<Response<MeModel>> getMe(String token) {
+    final $url = 'profile';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<MeModel, MeModel>($request);
+  }
+
+  @override
+  Future<Response<MyofficesModel>> getMyOffices(String token) {
+    final $url = 'my-offices';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<MyofficesModel, MyofficesModel>($request);
+  }
+
+  @override
+  Future<Response<OfficeConnectionResponse>> getConnOffice(
+      int id, String token) {
+    final $url = 'offices/${id}/connect';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client
+        .send<OfficeConnectionResponse, OfficeConnectionResponse>($request);
+  }
+
+  @override
+  Future<Response<OfficeConnectionResponse>> getDisConnOffice(String token) {
+    final $url = 'offices/disconnect';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client
+        .send<OfficeConnectionResponse, OfficeConnectionResponse>($request);
+  }
 }
