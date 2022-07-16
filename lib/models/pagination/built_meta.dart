@@ -6,9 +6,9 @@ part 'built_meta.g.dart';
 
 abstract class MetalinkModel implements Built<MetalinkModel, MetalinkModelBuilder> {
   @BuiltValueField(wireName: 'url')
-  String get url;
+  String? get url;
   @BuiltValueField(wireName: 'label')
-  String get label;
+  String? get label;
   @BuiltValueField(wireName: 'active')
   bool get active;
   MetalinkModel._();

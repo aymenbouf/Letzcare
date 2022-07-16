@@ -6,13 +6,13 @@ part 'built_links.g.dart';
 
 abstract class LinksModel implements Built<LinksModel, LinksModelBuilder> {
   @BuiltValueField(wireName: 'first')
-  String get first;
+  String? get first;
   @BuiltValueField(wireName: 'last')
-  String get last;
+  String? get last;
   @BuiltValueField(wireName: 'prev')
-  String get prev;
+  String? get prev;
   @BuiltValueField(wireName: 'next')
-  String get next;
+  String? get next;
 
   LinksModel._();
 

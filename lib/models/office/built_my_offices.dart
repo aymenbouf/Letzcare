@@ -10,11 +10,11 @@ part 'built_my_offices.g.dart';
 
 abstract class MyofficesModel implements Built<MyofficesModel, MyofficesModelBuilder> {
   @BuiltValueField(wireName: 'data')
-  BuiltList<OfficeModel?> get data;
+  BuiltList<OfficeModel>? get data;
   @BuiltValueField(wireName: 'links')
-  LinksModel get links;
+  LinksModel? get links;
    @BuiltValueField(wireName: 'meta')
-  MetaModel get meta;
+  MetaModel? get meta;
   
   
   MyofficesModel._();

@@ -20,15 +20,24 @@ class _$MetalinkModelSerializer implements StructuredSerializer<MetalinkModel> {
   Iterable<Object?> serialize(Serializers serializers, MetalinkModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'url',
-      serializers.serialize(object.url, specifiedType: const FullType(String)),
-      'label',
-      serializers.serialize(object.label,
-          specifiedType: const FullType(String)),
       'active',
       serializers.serialize(object.active, specifiedType: const FullType(bool)),
     ];
-
+    Object? value;
+    value = object.url;
+    if (value != null) {
+      result
+        ..add('url')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.label;
+    if (value != null) {
+      result
+        ..add('label')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -46,11 +55,11 @@ class _$MetalinkModelSerializer implements StructuredSerializer<MetalinkModel> {
       switch (key) {
         case 'url':
           result.url = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'label':
           result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'active':
           result.active = serializers.deserialize(value,
@@ -153,20 +162,16 @@ class _$MetaModelSerializer implements StructuredSerializer<MetaModel> {
 
 class _$MetalinkModel extends MetalinkModel {
   @override
-  final String url;
+  final String? url;
   @override
-  final String label;
+  final String? label;
   @override
   final bool active;
 
   factory _$MetalinkModel([void Function(MetalinkModelBuilder)? updates]) =>
       (new MetalinkModelBuilder()..update(updates))._build();
 
-  _$MetalinkModel._(
-      {required this.url, required this.label, required this.active})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(url, r'MetalinkModel', 'url');
-    BuiltValueNullFieldError.checkNotNull(label, r'MetalinkModel', 'label');
+  _$MetalinkModel._({this.url, this.label, required this.active}) : super._() {
     BuiltValueNullFieldError.checkNotNull(active, r'MetalinkModel', 'active');
   }
 
@@ -247,10 +252,8 @@ class MetalinkModelBuilder
   _$MetalinkModel _build() {
     final _$result = _$v ??
         new _$MetalinkModel._(
-            url: BuiltValueNullFieldError.checkNotNull(
-                url, r'MetalinkModel', 'url'),
-            label: BuiltValueNullFieldError.checkNotNull(
-                label, r'MetalinkModel', 'label'),
+            url: url,
+            label: label,
             active: BuiltValueNullFieldError.checkNotNull(
                 active, r'MetalinkModel', 'active'));
     replace(_$result);

@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child:Padding(
+        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 15,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     login();
                   },
                   child: Container(
@@ -112,21 +112,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 17),
                     decoration: BoxDecoration(
                       color: Colors.deepPurpleAccent,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(.3),
-                              offset: const Offset(0, 0),
-                              blurRadius: 6)
-                        ],
-                        ),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(.3),
+                            offset: const Offset(0, 0),
+                            blurRadius: 6)
+                      ],
+                    ),
                     child: Center(
                       child: loading
                           ? Image.asset('assets/loading.gif')
                           : Text(
-                        'Login',
-                        style: GoogleFonts.aBeeZee(color: Colors.white),
-                      ),
+                              'Login',
+                              style: GoogleFonts.aBeeZee(color: Colors.white),
+                            ),
                     ),
                   ),
                 )
@@ -139,29 +139,32 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() async {
-    if(_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       setState(() {
         loading = true;
       });
       fcm_token = await FirebaseMessaging.instance.getToken();
       final authbody = AuthModel(
-            (b) => b
+        (b) => b
           ..email = email
           ..password = password
           ..fcm_token = fcm_token,
       );
-      var res = await Provider.of<Chopper_Api>(context,listen: false).login(authbody);
-      if (res.statusCode == 200){
+      var res = await Provider.of<Chopper_Api>(context, listen: false)
+          .login(authbody);
+      if (res.statusCode == 200) {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('access_token', res.body!.access_token);
         var user = jsonDecode(res.bodyString)['user'];
-        localStorage.setString('user', json.encode(jsonDecode(res.bodyString)['user']));
+        localStorage.setString(
+            'user', json.encode(jsonDecode(res.bodyString)['user']));
         setState(() {
           loading = false;
         });
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const OfficesScreen()));
-      }else{
-        if (res.statusCode == 404){
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const OfficesScreen()));
+      } else {
+        if (res.statusCode == 404) {
           Fluttertoast.showToast(
               msg: "Mot de passe ou email incorrecte",
               backgroundColor: Colors.redAccent,
@@ -170,6 +173,4 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   }
-
 }
-

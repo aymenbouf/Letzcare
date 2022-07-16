@@ -17,18 +17,36 @@ class _$LinksModelSerializer implements StructuredSerializer<LinksModel> {
   @override
   Iterable<Object?> serialize(Serializers serializers, LinksModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'first',
-      serializers.serialize(object.first,
-          specifiedType: const FullType(String)),
-      'last',
-      serializers.serialize(object.last, specifiedType: const FullType(String)),
-      'prev',
-      serializers.serialize(object.prev, specifiedType: const FullType(String)),
-      'next',
-      serializers.serialize(object.next, specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.first;
+    if (value != null) {
+      result
+        ..add('first')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.last;
+    if (value != null) {
+      result
+        ..add('last')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.prev;
+    if (value != null) {
+      result
+        ..add('prev')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.next;
+    if (value != null) {
+      result
+        ..add('next')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -45,19 +63,19 @@ class _$LinksModelSerializer implements StructuredSerializer<LinksModel> {
       switch (key) {
         case 'first':
           result.first = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'last':
           result.last = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'prev':
           result.prev = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'next':
           result.next = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -68,28 +86,18 @@ class _$LinksModelSerializer implements StructuredSerializer<LinksModel> {
 
 class _$LinksModel extends LinksModel {
   @override
-  final String first;
+  final String? first;
   @override
-  final String last;
+  final String? last;
   @override
-  final String prev;
+  final String? prev;
   @override
-  final String next;
+  final String? next;
 
   factory _$LinksModel([void Function(LinksModelBuilder)? updates]) =>
       (new LinksModelBuilder()..update(updates))._build();
 
-  _$LinksModel._(
-      {required this.first,
-      required this.last,
-      required this.prev,
-      required this.next})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(first, r'LinksModel', 'first');
-    BuiltValueNullFieldError.checkNotNull(last, r'LinksModel', 'last');
-    BuiltValueNullFieldError.checkNotNull(prev, r'LinksModel', 'prev');
-    BuiltValueNullFieldError.checkNotNull(next, r'LinksModel', 'next');
-  }
+  _$LinksModel._({this.first, this.last, this.prev, this.next}) : super._();
 
   @override
   LinksModel rebuild(void Function(LinksModelBuilder) updates) =>
@@ -175,15 +183,7 @@ class LinksModelBuilder implements Builder<LinksModel, LinksModelBuilder> {
 
   _$LinksModel _build() {
     final _$result = _$v ??
-        new _$LinksModel._(
-            first: BuiltValueNullFieldError.checkNotNull(
-                first, r'LinksModel', 'first'),
-            last: BuiltValueNullFieldError.checkNotNull(
-                last, r'LinksModel', 'last'),
-            prev: BuiltValueNullFieldError.checkNotNull(
-                prev, r'LinksModel', 'prev'),
-            next: BuiltValueNullFieldError.checkNotNull(
-                next, r'LinksModel', 'next'));
+        new _$LinksModel._(first: first, last: last, prev: prev, next: next);
     replace(_$result);
     return _$result;
   }

@@ -19,19 +19,30 @@ class _$MyofficesModelSerializer
   @override
   Iterable<Object?> serialize(Serializers serializers, MyofficesModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'data',
-      serializers.serialize(object.data,
-          specifiedType: const FullType(
-              BuiltList, const [const FullType.nullable(OfficeModel)])),
-      'links',
-      serializers.serialize(object.links,
-          specifiedType: const FullType(LinksModel)),
-      'meta',
-      serializers.serialize(object.meta,
-          specifiedType: const FullType(MetaModel)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.data;
+    if (value != null) {
+      result
+        ..add('data')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(OfficeModel)])));
+    }
+    value = object.links;
+    if (value != null) {
+      result
+        ..add('links')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(LinksModel)));
+    }
+    value = object.meta;
+    if (value != null) {
+      result
+        ..add('meta')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(MetaModel)));
+    }
     return result;
   }
 
@@ -50,7 +61,7 @@ class _$MyofficesModelSerializer
         case 'data':
           result.data.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType.nullable(OfficeModel)]))!
+                      BuiltList, const [const FullType(OfficeModel)]))!
               as BuiltList<Object?>);
           break;
         case 'links':
@@ -70,22 +81,16 @@ class _$MyofficesModelSerializer
 
 class _$MyofficesModel extends MyofficesModel {
   @override
-  final BuiltList<OfficeModel?> data;
+  final BuiltList<OfficeModel>? data;
   @override
-  final LinksModel links;
+  final LinksModel? links;
   @override
-  final MetaModel meta;
+  final MetaModel? meta;
 
   factory _$MyofficesModel([void Function(MyofficesModelBuilder)? updates]) =>
       (new MyofficesModelBuilder()..update(updates))._build();
 
-  _$MyofficesModel._(
-      {required this.data, required this.links, required this.meta})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(data, r'MyofficesModel', 'data');
-    BuiltValueNullFieldError.checkNotNull(links, r'MyofficesModel', 'links');
-    BuiltValueNullFieldError.checkNotNull(meta, r'MyofficesModel', 'meta');
-  }
+  _$MyofficesModel._({this.data, this.links, this.meta}) : super._();
 
   @override
   MyofficesModel rebuild(void Function(MyofficesModelBuilder) updates) =>
@@ -123,10 +128,10 @@ class MyofficesModelBuilder
     implements Builder<MyofficesModel, MyofficesModelBuilder> {
   _$MyofficesModel? _$v;
 
-  ListBuilder<OfficeModel?>? _data;
-  ListBuilder<OfficeModel?> get data =>
-      _$this._data ??= new ListBuilder<OfficeModel?>();
-  set data(ListBuilder<OfficeModel?>? data) => _$this._data = data;
+  ListBuilder<OfficeModel>? _data;
+  ListBuilder<OfficeModel> get data =>
+      _$this._data ??= new ListBuilder<OfficeModel>();
+  set data(ListBuilder<OfficeModel>? data) => _$this._data = data;
 
   LinksModelBuilder? _links;
   LinksModelBuilder get links => _$this._links ??= new LinksModelBuilder();
@@ -141,9 +146,9 @@ class MyofficesModelBuilder
   MyofficesModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _data = $v.data.toBuilder();
-      _links = $v.links.toBuilder();
-      _meta = $v.meta.toBuilder();
+      _data = $v.data?.toBuilder();
+      _links = $v.links?.toBuilder();
+      _meta = $v.meta?.toBuilder();
       _$v = null;
     }
     return this;
@@ -168,16 +173,18 @@ class MyofficesModelBuilder
     try {
       _$result = _$v ??
           new _$MyofficesModel._(
-              data: data.build(), links: links.build(), meta: meta.build());
+              data: _data?.build(),
+              links: _links?.build(),
+              meta: _meta?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'data';
-        data.build();
+        _data?.build();
         _$failedField = 'links';
-        links.build();
+        _links?.build();
         _$failedField = 'meta';
-        meta.build();
+        _meta?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'MyofficesModel', _$failedField, e.toString());
