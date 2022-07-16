@@ -22,7 +22,7 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
       serializers.serialize(object.id, specifiedType: const FullType(int)),
       'medical_office_id',
       serializers.serialize(object.medical_office_id,
-          specifiedType: const FullType(int)),
+          specifiedType: const FullType(String)),
       'first_name',
       serializers.serialize(object.first_name,
           specifiedType: const FullType(String)),
@@ -108,7 +108,7 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           break;
         case 'medical_office_id':
           result.medical_office_id = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'first_name':
           result.first_name = serializers.deserialize(value,
@@ -173,7 +173,7 @@ class _$UserModel extends UserModel {
   @override
   final int id;
   @override
-  final int medical_office_id;
+  final String medical_office_id;
   @override
   final String first_name;
   @override
@@ -328,9 +328,9 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  int? _medical_office_id;
-  int? get medical_office_id => _$this._medical_office_id;
-  set medical_office_id(int? medical_office_id) =>
+  String? _medical_office_id;
+  String? get medical_office_id => _$this._medical_office_id;
+  set medical_office_id(String? medical_office_id) =>
       _$this._medical_office_id = medical_office_id;
 
   String? _first_name;
