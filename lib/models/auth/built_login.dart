@@ -19,3 +19,17 @@ abstract class LoginModel implements Built<LoginModel, LoginModelBuilder> {
   factory LoginModel([void Function(LoginModelBuilder)? updates]) = _$LoginModel;
   static Serializer<LoginModel> get serializer => _$loginModelSerializer;
 }
+
+abstract class AuthModel implements Built<AuthModel, AuthModelBuilder> {
+  @BuiltValueField(wireName: 'email')
+  String get email;
+  @BuiltValueField(wireName: 'password')
+  String get password;
+  @BuiltValueField(wireName: 'fcm_token')
+  String get fcm_token;
+  
+  AuthModel._();
+
+  factory AuthModel([void Function(AuthModelBuilder)? updates]) = _$AuthModel;
+  static Serializer<AuthModel> get serializer => _$authModelSerializer;
+}

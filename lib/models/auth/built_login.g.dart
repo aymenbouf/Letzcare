@@ -7,6 +7,7 @@ part of 'built_login.dart';
 // **************************************************************************
 
 Serializer<LoginModel> _$loginModelSerializer = new _$LoginModelSerializer();
+Serializer<AuthModel> _$authModelSerializer = new _$AuthModelSerializer();
 
 class _$LoginModelSerializer implements StructuredSerializer<LoginModel> {
   @override
@@ -54,6 +55,60 @@ class _$LoginModelSerializer implements StructuredSerializer<LoginModel> {
         case 'user':
           result.user.replace(serializers.deserialize(value,
               specifiedType: const FullType(UserModel))! as UserModel);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$AuthModelSerializer implements StructuredSerializer<AuthModel> {
+  @override
+  final Iterable<Type> types = const [AuthModel, _$AuthModel];
+  @override
+  final String wireName = 'AuthModel';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, AuthModel object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'email',
+      serializers.serialize(object.email,
+          specifiedType: const FullType(String)),
+      'password',
+      serializers.serialize(object.password,
+          specifiedType: const FullType(String)),
+      'fcm_token',
+      serializers.serialize(object.fcm_token,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  AuthModel deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new AuthModelBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'email':
+          result.email = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'password':
+          result.password = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'fcm_token':
+          result.fcm_token = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -180,6 +235,113 @@ class LoginModelBuilder implements Builder<LoginModel, LoginModelBuilder> {
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$AuthModel extends AuthModel {
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  final String fcm_token;
+
+  factory _$AuthModel([void Function(AuthModelBuilder)? updates]) =>
+      (new AuthModelBuilder()..update(updates))._build();
+
+  _$AuthModel._(
+      {required this.email, required this.password, required this.fcm_token})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(email, r'AuthModel', 'email');
+    BuiltValueNullFieldError.checkNotNull(password, r'AuthModel', 'password');
+    BuiltValueNullFieldError.checkNotNull(fcm_token, r'AuthModel', 'fcm_token');
+  }
+
+  @override
+  AuthModel rebuild(void Function(AuthModelBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  AuthModelBuilder toBuilder() => new AuthModelBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is AuthModel &&
+        email == other.email &&
+        password == other.password &&
+        fcm_token == other.fcm_token;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc(0, email.hashCode), password.hashCode), fcm_token.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'AuthModel')
+          ..add('email', email)
+          ..add('password', password)
+          ..add('fcm_token', fcm_token))
+        .toString();
+  }
+}
+
+class AuthModelBuilder implements Builder<AuthModel, AuthModelBuilder> {
+  _$AuthModel? _$v;
+
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
+
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
+
+  String? _fcm_token;
+  String? get fcm_token => _$this._fcm_token;
+  set fcm_token(String? fcm_token) => _$this._fcm_token = fcm_token;
+
+  AuthModelBuilder();
+
+  AuthModelBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _email = $v.email;
+      _password = $v.password;
+      _fcm_token = $v.fcm_token;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(AuthModel other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$AuthModel;
+  }
+
+  @override
+  void update(void Function(AuthModelBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  AuthModel build() => _build();
+
+  _$AuthModel _build() {
+    final _$result = _$v ??
+        new _$AuthModel._(
+            email: BuiltValueNullFieldError.checkNotNull(
+                email, r'AuthModel', 'email'),
+            password: BuiltValueNullFieldError.checkNotNull(
+                password, r'AuthModel', 'password'),
+            fcm_token: BuiltValueNullFieldError.checkNotNull(
+                fcm_token, r'AuthModel', 'fcm_token'));
     replace(_$result);
     return _$result;
   }
