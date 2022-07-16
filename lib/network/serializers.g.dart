@@ -7,6 +7,7 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AuthModel.serializer)
       ..add(DataModel.serializer)
       ..add(LinksModel.serializer)
       ..add(LoginModel.serializer)

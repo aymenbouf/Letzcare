@@ -43,6 +43,7 @@ dependencies:
   firebase_core: ^1.19.2
   email_validator: ^2.0.1
   google_fonts: ^3.0.1
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

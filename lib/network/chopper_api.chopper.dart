@@ -62,4 +62,12 @@ class _$Chopper_Api extends Chopper_Api {
     return client
         .send<OfficeConnectionResponse, OfficeConnectionResponse>($request);
   }
+
+  @override
+  Future<Response<LoginModel>> login(AuthModel body) {
+    final $url = 'login';
+    final $body = body;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<LoginModel, LoginModel>($request);
+  }
 }
