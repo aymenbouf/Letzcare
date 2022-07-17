@@ -46,7 +46,7 @@ class _$Chopper_Api extends Chopper_Api {
       'Authorization': token,
     };
 
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    final $request = Request('POST', $url, client.baseUrl, headers: $headers);
     return client
         .send<OfficeConnectionResponse, OfficeConnectionResponse>($request);
   }
@@ -58,9 +58,20 @@ class _$Chopper_Api extends Chopper_Api {
       'Authorization': token,
     };
 
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    final $request = Request('POST', $url, client.baseUrl, headers: $headers);
     return client
         .send<OfficeConnectionResponse, OfficeConnectionResponse>($request);
+  }
+
+  @override
+  Future<Response<LogoutModel>> logout(String token) {
+    final $url = 'logout';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('POST', $url, client.baseUrl, headers: $headers);
+    return client.send<LogoutModel, LogoutModel>($request);
   }
 
   @override

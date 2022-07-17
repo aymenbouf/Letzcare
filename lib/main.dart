@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:letzcqre/network/chopper_api.dart';
+import 'package:letzcqre/screens/inOffice.dart';
 import 'package:letzcqre/screens/offices.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,8 +51,9 @@ class CheckAuth extends StatefulWidget {
 
 class _CheckAuthState extends State<CheckAuth> {
   bool isAuth = false;
-  bool? isTutor;
   String? token;
+  bool inOffice = false;
+  int? office_id;
 
   @override
   void initState() {
@@ -69,23 +71,12 @@ class _CheckAuthState extends State<CheckAuth> {
         storage.remove('user');
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const LoginScreen()));
-      } else {
-        var user = jsonDecode(storage.getString('user')!);
-        if (user['type'] == 2) {
-          setState(() {
-            isTutor = true;
-          });
-        } else {
-          setState(() {
-            isTutor = false;
-          });
-        }
       }
     }
   }
 
   getData() async {
-    await _checkIfLoggedIn();
+    await _checkIfInOffice();
     await getSignedinUser();
   }
 
@@ -99,12 +90,28 @@ class _CheckAuthState extends State<CheckAuth> {
     }
   }
 
+  _checkIfInOffice() async {
+    await _checkIfLoggedIn();
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    office_id = localStorage.getInt('office_id');
+    if (office_id != null) {
+      setState(() {
+        inOffice = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget child;
 
     if (isAuth) {
-      child = const OfficesScreen();
+      if (inOffice) {
+        child = InOfficeScreen(office_id: office_id!);
+      }else {
+        child = const OfficesScreen();
+      }
+
     } else {
       child = const LoginScreen();
     }

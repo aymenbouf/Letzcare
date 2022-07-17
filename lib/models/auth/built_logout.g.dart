@@ -21,13 +21,22 @@ class _$LogoutModelSerializer implements StructuredSerializer<LogoutModel> {
       'success',
       serializers.serialize(object.success,
           specifiedType: const FullType(bool)),
-      'message',
-      serializers.serialize(object.message,
-          specifiedType: const FullType(String)),
-      'data',
-      serializers.serialize(object.data, specifiedType: const FullType(String)),
     ];
-
+    Object? value;
+    value = object.message;
+    if (value != null) {
+      result
+        ..add('message')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.data;
+    if (value != null) {
+      result
+        ..add('data')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -48,11 +57,11 @@ class _$LogoutModelSerializer implements StructuredSerializer<LogoutModel> {
           break;
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'data':
           result.data = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -65,19 +74,16 @@ class _$LogoutModel extends LogoutModel {
   @override
   final bool success;
   @override
-  final String message;
+  final String? message;
   @override
-  final String data;
+  final String? data;
 
   factory _$LogoutModel([void Function(LogoutModelBuilder)? updates]) =>
       (new LogoutModelBuilder()..update(updates))._build();
 
-  _$LogoutModel._(
-      {required this.success, required this.message, required this.data})
+  _$LogoutModel._({required this.success, this.message, this.data})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, r'LogoutModel', 'success');
-    BuiltValueNullFieldError.checkNotNull(message, r'LogoutModel', 'message');
-    BuiltValueNullFieldError.checkNotNull(data, r'LogoutModel', 'data');
   }
 
   @override
@@ -159,10 +165,8 @@ class LogoutModelBuilder implements Builder<LogoutModel, LogoutModelBuilder> {
         new _$LogoutModel._(
             success: BuiltValueNullFieldError.checkNotNull(
                 success, r'LogoutModel', 'success'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'LogoutModel', 'message'),
-            data: BuiltValueNullFieldError.checkNotNull(
-                data, r'LogoutModel', 'data'));
+            message: message,
+            data: data);
     replace(_$result);
     return _$result;
   }

@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:letzcqre/components/PrimaryButton.dart';
 import 'package:letzcqre/models/auth/built_login.dart';
 import 'package:letzcqre/network/chopper_api.dart';
 import 'package:letzcqre/screens/offices.dart';
@@ -103,33 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    login();
-                  },
-                  child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(vertical: 17),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(.3),
-                            offset: const Offset(0, 0),
-                            blurRadius: 6)
-                      ],
-                    ),
-                    child: Center(
-                      child: loading
-                          ? Image.asset('assets/loading.gif')
-                          : Text(
-                              'Login',
-                              style: GoogleFonts.aBeeZee(color: Colors.white),
-                            ),
-                    ),
-                  ),
-                )
+                PrimaryButton(onTap: _login ,loading: loading,text: 'Login',)
               ],
             ),
           ),
@@ -138,14 +113,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() async {
+  void _login() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         loading = true;
       });
       fcm_token = await FirebaseMessaging.instance.getToken();
       final authbody = AuthModel(
-        (b) => b
+            (b) =>
+        b
           ..email = email
           ..password = password
           ..fcm_token = fcm_token,
@@ -165,12 +141,19 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialPageRoute(builder: (context) => const OfficesScreen()));
       } else {
         if (res.statusCode == 404) {
+          setState(() {
+            loading = false;
+          });
           Fluttertoast.showToast(
-              msg: "Mot de passe ou email incorrecte",
-              backgroundColor: Colors.redAccent,
-              fontSize: 18);
+            msg: "Mot de passe ou email incorrecte",
+            backgroundColor: Colors.redAccent,
+            toastLength: Toast.LENGTH_LONG,
+            fontSize: 18,);
         }
       }
     }
   }
+
 }
+
+

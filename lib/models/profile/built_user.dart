@@ -10,7 +10,7 @@ abstract class UserModel implements Built<UserModel, UserModelBuilder> {
   @BuiltValueField(wireName: 'id')
   int get id;
   @BuiltValueField(wireName: 'medical_office_id')
-  String get medical_office_id;
+  String? get medical_office_id;
   @BuiltValueField(wireName: 'first_name')
   String get first_name;
   @BuiltValueField(wireName: 'last_name')

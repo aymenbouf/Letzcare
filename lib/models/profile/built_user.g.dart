@@ -20,9 +20,6 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
     final result = <Object?>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
-      'medical_office_id',
-      serializers.serialize(object.medical_office_id,
-          specifiedType: const FullType(String)),
       'first_name',
       serializers.serialize(object.first_name,
           specifiedType: const FullType(String)),
@@ -46,6 +43,13 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.medical_office_id;
+    if (value != null) {
+      result
+        ..add('medical_office_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.image;
     if (value != null) {
       result
@@ -108,7 +112,7 @@ class _$UserModelSerializer implements StructuredSerializer<UserModel> {
           break;
         case 'medical_office_id':
           result.medical_office_id = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'first_name':
           result.first_name = serializers.deserialize(value,
@@ -173,7 +177,7 @@ class _$UserModel extends UserModel {
   @override
   final int id;
   @override
-  final String medical_office_id;
+  final String? medical_office_id;
   @override
   final String first_name;
   @override
@@ -206,7 +210,7 @@ class _$UserModel extends UserModel {
 
   _$UserModel._(
       {required this.id,
-      required this.medical_office_id,
+      this.medical_office_id,
       required this.first_name,
       required this.last_name,
       required this.personal_number,
@@ -222,8 +226,6 @@ class _$UserModel extends UserModel {
       this.office})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'UserModel', 'id');
-    BuiltValueNullFieldError.checkNotNull(
-        medical_office_id, r'UserModel', 'medical_office_id');
     BuiltValueNullFieldError.checkNotNull(
         first_name, r'UserModel', 'first_name');
     BuiltValueNullFieldError.checkNotNull(last_name, r'UserModel', 'last_name');
@@ -433,8 +435,7 @@ class UserModelBuilder implements Builder<UserModel, UserModelBuilder> {
       _$result = _$v ??
           new _$UserModel._(
               id: BuiltValueNullFieldError.checkNotNull(id, r'UserModel', 'id'),
-              medical_office_id: BuiltValueNullFieldError.checkNotNull(
-                  medical_office_id, r'UserModel', 'medical_office_id'),
+              medical_office_id: medical_office_id,
               first_name: BuiltValueNullFieldError.checkNotNull(
                   first_name, r'UserModel', 'first_name'),
               last_name: BuiltValueNullFieldError.checkNotNull(

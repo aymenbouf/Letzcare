@@ -11,10 +11,10 @@ abstract class LogoutModel implements Built<LogoutModel, LogoutModelBuilder> {
   @BuiltValueField(wireName: 'success')
   bool get success;
   @BuiltValueField(wireName: 'message')
-  String get message;
+  String? get message;
   @BuiltValueField(wireName: 'data')
-  String get data;
-  
+  String? get data;
+
   LogoutModel._();
 
   factory LogoutModel([void Function(LogoutModelBuilder)? updates]) = _$LogoutModel;
