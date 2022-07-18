@@ -23,6 +23,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -48,93 +49,95 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: Center(
             child: Form(
               key: key,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset('assets/password.png'),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    cursorColor: primaryColor,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Veuillez remplir le champs';
-                      } else {
-                        current = value;
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Ancien mot de passe',
-                        hintStyle: primaryGreyText,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: primaryColor))),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    cursorColor: primaryColor,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Veuillez remplir le champs';
-                      } else {
-                        newpass = value;
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Nouveau mot de passe',
-                        hintStyle: primaryGreyText,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: primaryColor))),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    cursorColor: primaryColor,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Veuillez remplir le champs';
-                      } else {
-                        if (value != newpass) {
-                          return 'La confirmation du mot de passe ne correspond pas';
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset('assets/password.png'),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      cursorColor: primaryColor,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez remplir le champs';
                         } else {
-                          confirmation = value;
+                          current = value;
                           return null;
                         }
-                      }
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Confirmation',
-                        hintStyle: primaryGreyText,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Ancien mot de passe',
+                          hintStyle: primaryGreyText,
+                          border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: primaryColor))),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: PrimaryButton(onTap: editPassword,text: "Sauvegarder",loading: loading,)),
-                ],
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: primaryColor))),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      obscureText: true,
+                      cursorColor: primaryColor,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez remplir le champs';
+                        } else {
+                          newpass = value;
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Nouveau mot de passe',
+                          hintStyle: primaryGreyText,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: primaryColor))),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      cursorColor: primaryColor,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez remplir le champs';
+                        } else {
+                          if (value != newpass) {
+                            return 'La confirmation du mot de passe ne correspond pas';
+                          } else {
+                            confirmation = value;
+                            return null;
+                          }
+                        }
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Confirmation',
+                          hintStyle: primaryGreyText,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: primaryColor))),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: PrimaryButton(onTap: editPassword,text: "Sauvegarder",loading: loading,)),
+                  ],
+                ),
               ),
             ),
           ),

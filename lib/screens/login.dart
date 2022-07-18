@@ -27,85 +27,88 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(child: Image.asset('assets/doctor.png')),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(.3),
-                            offset: const Offset(0, 0),
-                            blurRadius: 6)
-                      ]),
-                  child: TextFormField(
-                    validator: (emailValue) {
-                      if (emailValue!.isEmpty) {
-                        return 'Veuillez saisir votre email';
-                      }
-                      if (!EmailValidator.validate(emailValue, true)) {
-                        return 'Adresse email invalide';
-                      }
-                      email = emailValue;
-                      return null;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 20),
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      hintText: 'Email',
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(child: Image.asset('assets/doctor.png')),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(.3),
+                              offset: const Offset(0, 0),
+                              blurRadius: 6)
+                        ]),
+                    child: TextFormField(
+                      validator: (emailValue) {
+                        if (emailValue!.isEmpty) {
+                          return 'Veuillez saisir votre email';
+                        }
+                        if (!EmailValidator.validate(emailValue, true)) {
+                          return 'Adresse email invalide';
+                        }
+                        email = emailValue;
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 20),
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        hintText: 'Email',
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(.3),
-                            offset: const Offset(0, 0),
-                            blurRadius: 6)
-                      ]),
-                  child: TextFormField(
-                    validator: (passwordValue) {
-                      if (passwordValue!.isEmpty) {
-                        return 'Veuillez saisir votre mot de passe';
-                      }
-                      password = passwordValue;
-                      return null;
-                    },
-                    obscureText: true,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 20),
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      hintText: 'Mot de passe',
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(.3),
+                              offset: const Offset(0, 0),
+                              blurRadius: 6)
+                        ]),
+                    child: TextFormField(
+                      validator: (passwordValue) {
+                        if (passwordValue!.isEmpty) {
+                          return 'Veuillez saisir votre mot de passe';
+                        }
+                        password = passwordValue;
+                        return null;
+                      },
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 20),
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        hintText: 'Mot de passe',
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                PrimaryButton(onTap: _login ,loading: loading,text: 'Login',)
-              ],
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  PrimaryButton(onTap: _login ,loading: loading,text: 'Login',)
+                ],
+              ),
             ),
           ),
         ),

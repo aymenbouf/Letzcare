@@ -89,6 +89,11 @@ class _CheckAuthState extends State<CheckAuth> {
       setState(() {
         isAuth = true;
       });
+    }else{
+      setState(() {
+        isAuth = false;
+      });
+
     }
   }
 
