@@ -24,12 +24,13 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Provider(
       create: (
-          _,
-          ) =>
+        _,
+      ) =>
           Chopper_Api.create(),
       dispose: (_, Chopper_Api service) => service.client.dispose(),
       child: MaterialApp(
@@ -50,19 +51,20 @@ class CheckAuth extends StatefulWidget {
 }
 
 class _CheckAuthState extends State<CheckAuth> {
-  bool isAuth = false;
+  bool? isAuth;
   String? token;
   bool inOffice = false;
   int? office_id;
+  Widget? landingScreen;
 
   @override
   void initState() {
-    getData();
+    _getLandingScreen();
     super.initState();
   }
 
   getSignedinUser() async {
-    if (isAuth) {
+    if (isAuth!) {
       SharedPreferences storage = await SharedPreferences.getInstance();
       var res = await Provider.of<Chopper_Api>(context, listen: false)
           .getMe('Bearer $token');
@@ -101,23 +103,33 @@ class _CheckAuthState extends State<CheckAuth> {
     }
   }
 
+  _getLandingScreen() async {
+    await getData();
+    if (isAuth!) {
+      if (inOffice) {
+        setState(() {
+          landingScreen = InOfficeScreen(office_id: office_id!);
+        });
+
+      } else {
+        setState(() {
+          landingScreen = const OfficesScreen();
+        });
+
+      }
+    } else {
+      setState(() {
+        landingScreen = const LoginScreen();
+      });
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget child;
 
-    if (isAuth) {
-      if (inOffice) {
-        child = InOfficeScreen(office_id: office_id!);
-      }else {
-        child = const OfficesScreen();
-      }
-
-    } else {
-      child = const LoginScreen();
-    }
     return Scaffold(
-      body: child,
+      body: landingScreen ?? Container(),
     );
   }
 }
-

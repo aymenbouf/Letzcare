@@ -11,6 +11,8 @@ import 'package:letzcqre/models/office/built_office.dart';
 import 'package:letzcqre/models/profile/built_user.dart';
 import 'package:letzcqre/network/chopper_api.dart';
 import 'package:letzcqre/screens/inOffice.dart';
+import 'package:letzcqre/screens/profile.dart';
+import 'package:letzcqre/screens/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,12 +65,28 @@ class _OfficesScreenState extends State<OfficesScreen> {
           child: Column(
             children: [
               ListTile(
-                leading: Icon(
-                  Icons.logout,
-                  color: Colors.deepPurpleAccent,
+                leading: const Icon(
+                  Icons.settings_outlined,
+                  color: primaryColor,
                 ),
                 title: Text(
-                  "Se deconnecter",
+                  "Paramètres",
+                  style: primaryDarkText,
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsScreen()));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.logout,
+                  color: primaryColor,
+                ),
+                title: Text(
+                  "Se déconnecter",
                   style: primaryDarkText,
                 ),
                 onTap: () {
@@ -154,7 +172,10 @@ class _OfficesScreenState extends State<OfficesScreen> {
                   backgroundColor: Colors.white,
                   backgroundImage: AssetImage('assets/hospital.png'),
                 ),
-                title: Text(office.name,style: smallDarkBoldText,),
+                title: Text(
+                  office.name,
+                  style: smallDarkBoldText,
+                ),
                 subtitle: Text(office.address),
               ),
               collapsed: Column(
@@ -162,7 +183,10 @@ class _OfficesScreenState extends State<OfficesScreen> {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text('Type : ',style: smallDarkBoldText,),
+                      Text(
+                        'Type : ',
+                        style: smallDarkBoldText,
+                      ),
                       Text(office.type)
                     ],
                   )
@@ -173,19 +197,30 @@ class _OfficesScreenState extends State<OfficesScreen> {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text('Type : ',style: smallDarkBoldText,),
+                      Text(
+                        'Type : ',
+                        style: smallDarkBoldText,
+                      ),
                       Text(office.type)
                     ],
                   ),
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text('Manager : ',style: smallDarkBoldText,),
-                      Text(office.manager_first_name + ' ' + office.manager_last_name)
+                      Text(
+                        'Manager : ',
+                        style: smallDarkBoldText,
+                      ),
+                      Text(office.manager_first_name +
+                          ' ' +
+                          office.manager_last_name)
                     ],
                   ),
                   const SizedBox(height: 10),
-                PrimaryButton(onTap: () => connectToOffice(office.id), loading: loading, text: 'Connecter')
+                  PrimaryButton(
+                      onTap: () => connectToOffice(office.id),
+                      loading: loading,
+                      text: 'Connecter')
                 ],
               ))),
     );
@@ -195,19 +230,22 @@ class _OfficesScreenState extends State<OfficesScreen> {
     setState(() {
       loading = true;
     });
-    var res = await Provider.of<Chopper_Api>(context,listen: false).getConnOffice(id, 'Bearer $token');
+    var res = await Provider.of<Chopper_Api>(context, listen: false)
+        .getConnOffice(id, 'Bearer $token');
     print(res.bodyString);
-    if (res.statusCode == 202){
+    if (res.statusCode == 202) {
       SharedPreferences local = await SharedPreferences.getInstance();
       local.setInt('office_id', id);
       setState(() {
         loading = false;
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> InOfficeScreen(office_id: id)));
-    }else{
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => InOfficeScreen(office_id: id)));
+    } else {
       Fluttertoast.showToast(
-          msg: 'Vous n\'avez pas access',
-          backgroundColor: primaryColor);
+          msg: 'Vous n\'avez pas access', backgroundColor: primaryColor);
       setState(() {
         loading = false;
       });
@@ -217,7 +255,7 @@ class _OfficesScreenState extends State<OfficesScreen> {
   void logout() async {
     var res = await Provider.of<Chopper_Api>(context, listen: false)
         .logout('Bearer $token');
-    print(res.bodyString);
+    //print(res.bodyString);
     if (res.statusCode == 200) {
       SharedPreferences storage = await SharedPreferences.getInstance();
       storage.remove('access_token');
