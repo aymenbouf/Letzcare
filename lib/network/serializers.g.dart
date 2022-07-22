@@ -9,6 +9,11 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthModel.serializer)
       ..add(DataModel.serializer)
+      ..add(DocumentModel.serializer)
+      ..add(ErrorModel.serializer)
+      ..add(LegalprotectionModel.serializer)
+      ..add(LifewishModel.serializer)
+      ..add(LifewishdetailsModel.serializer)
       ..add(LinksModel.serializer)
       ..add(LoginModel.serializer)
       ..add(LogoutModel.serializer)
@@ -19,10 +24,28 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(OfficeConnectionResponse.serializer)
       ..add(OfficeModel.serializer)
       ..add(OfficestaffModel.serializer)
+      ..add(PatientModel.serializer)
+      ..add(PatientdataModel.serializer)
+      ..add(PatientresponseModel.serializer)
+      ..add(RelativeModel.serializer)
+      ..add(RelativedetailsModel.serializer)
+      ..add(RelativeresponseModel.serializer)
+      ..add(RelativesModel.serializer)
       ..add(UserModel.serializer)
+      ..add(WisherrorModel.serializer)
+      ..add(WishresponseModel.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(DocumentModel)]),
+          () => new ListBuilder<DocumentModel>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(OfficeModel)]),
           () => new ListBuilder<OfficeModel>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PatientModel)]),
+          () => new ListBuilder<PatientModel>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(RelativeModel)]),
+          () => new ListBuilder<RelativeModel>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType.nullable(MetalinkModel)]),
