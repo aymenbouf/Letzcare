@@ -25,8 +25,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(OfficeModel.serializer)
       ..add(OfficestaffModel.serializer)
       ..add(PatientModel.serializer)
+      ..add(PatientResponse.serializer)
       ..add(PatientdataModel.serializer)
-      ..add(PatientresponseModel.serializer)
       ..add(RelativeModel.serializer)
       ..add(RelativedetailsModel.serializer)
       ..add(RelativeresponseModel.serializer)
@@ -34,9 +34,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UserModel.serializer)
       ..add(WisherrorModel.serializer)
       ..add(WishresponseModel.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(DocumentModel)]),
-          () => new ListBuilder<DocumentModel>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(OfficeModel)]),
           () => new ListBuilder<OfficeModel>())
@@ -46,6 +43,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(RelativeModel)]),
           () => new ListBuilder<RelativeModel>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(DocumentModel)]),
+          () => new ListBuilder<DocumentModel>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType.nullable(MetalinkModel)]),

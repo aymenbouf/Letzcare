@@ -4,6 +4,7 @@ import 'package:letzcqre/models/auth/built_login.dart';
 import 'package:letzcqre/models/auth/built_logout.dart';
 import 'package:letzcqre/models/office/built_connect_office.dart';
 import 'package:letzcqre/models/office/built_my_offices.dart';
+import 'package:letzcqre/models/patient/built_patient.dart';
 import 'package:letzcqre/models/profile/built_me.dart';
 import 'package:letzcqre/network/built_value_converter.dart';
 import 'package:chopper/chopper.dart';
@@ -17,6 +18,9 @@ abstract class Chopper_Api extends ChopperService {
 
   @Get(path: 'my-offices')
   Future<Response<MyofficesModel>> getMyOffices(@Header('Authorization') String token);
+
+  @Get(path: 'patients')
+  Future<Response<PatientResponse>> getPatients(@Header('Authorization') String token);
 
   @Post(path: 'offices/{id}/connect')
   Future<Response<OfficeConnectionResponse>> getConnOffice(

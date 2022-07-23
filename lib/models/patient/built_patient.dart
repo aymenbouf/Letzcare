@@ -9,7 +9,7 @@ import 'package:built_collection/built_collection.dart';
 part 'built_patient.g.dart';
 
 
-abstract class PatientresponseModel implements Built<PatientresponseModel, PatientresponseModelBuilder> {
+abstract class PatientResponse implements Built<PatientResponse, PatientResponseBuilder> {
   @BuiltValueField(wireName: 'success')
   bool? get success;
   @BuiltValueField(wireName: 'message')
@@ -24,10 +24,10 @@ abstract class PatientresponseModel implements Built<PatientresponseModel, Patie
 
   
   
-  PatientresponseModel._();
+  PatientResponse._();
 
-  factory PatientresponseModel([void Function(PatientresponseModelBuilder)? updates]) = _$PatientresponseModel;
-  static Serializer<PatientresponseModel> get serializer => _$patientresponseModelSerializer;
+  factory PatientResponse([void Function(PatientResponseBuilder)? updates]) = _$PatientResponse;
+  static Serializer<PatientResponse> get serializer => _$patientResponseSerializer;
 }
 abstract class PatientdataModel implements Built<PatientdataModel, PatientdataModelBuilder> {
   
@@ -58,7 +58,7 @@ abstract class PatientModel implements Built<PatientModel, PatientModelBuilder> 
   @BuiltValueField(wireName: 'main_lang')
   String get main_lang;
   @BuiltValueField(wireName: 'other_lang')
-  List<String> get other_lang;
+  BuiltList<String>? get other_lang;
   @BuiltValueField(wireName: 'medical_office_id')
   int? get medical_office_id;
   @BuiltValueField(wireName: 'life_wish')
@@ -67,7 +67,6 @@ abstract class PatientModel implements Built<PatientModel, PatientModelBuilder> 
   LegalprotectionModel? get legal_protection;
   @BuiltValueField(wireName: 'electronicDocuments')
   BuiltList<DocumentModel>? get electronicDocuments;
-
   @BuiltValueField(wireName: 'gender')
   String? get gender;
   @BuiltValueField(wireName: 'birth_date')

@@ -46,7 +46,7 @@ part 'serializers.g.dart';
   RelativeModel,
   RelativesModel,
   DocumentModel,
-  PatientresponseModel,
+  PatientResponse,
   PatientdataModel,
   PatientModel,
   LegalprotectionModel

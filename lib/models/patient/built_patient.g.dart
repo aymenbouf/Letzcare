@@ -6,8 +6,8 @@ part of 'built_patient.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<PatientresponseModel> _$patientresponseModelSerializer =
-    new _$PatientresponseModelSerializer();
+Serializer<PatientResponse> _$patientResponseSerializer =
+    new _$PatientResponseSerializer();
 Serializer<PatientdataModel> _$patientdataModelSerializer =
     new _$PatientdataModelSerializer();
 Serializer<PatientModel> _$patientModelSerializer =
@@ -15,19 +15,15 @@ Serializer<PatientModel> _$patientModelSerializer =
 Serializer<LegalprotectionModel> _$legalprotectionModelSerializer =
     new _$LegalprotectionModelSerializer();
 
-class _$PatientresponseModelSerializer
-    implements StructuredSerializer<PatientresponseModel> {
+class _$PatientResponseSerializer
+    implements StructuredSerializer<PatientResponse> {
   @override
-  final Iterable<Type> types = const [
-    PatientresponseModel,
-    _$PatientresponseModel
-  ];
+  final Iterable<Type> types = const [PatientResponse, _$PatientResponse];
   @override
-  final String wireName = 'PatientresponseModel';
+  final String wireName = 'PatientResponse';
 
   @override
-  Iterable<Object?> serialize(
-      Serializers serializers, PatientresponseModel object,
+  Iterable<Object?> serialize(Serializers serializers, PatientResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -71,10 +67,10 @@ class _$PatientresponseModelSerializer
   }
 
   @override
-  PatientresponseModel deserialize(
+  PatientResponse deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PatientresponseModelBuilder();
+    final result = new PatientResponseBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -187,11 +183,16 @@ class _$PatientModelSerializer implements StructuredSerializer<PatientModel> {
       'main_lang',
       serializers.serialize(object.main_lang,
           specifiedType: const FullType(String)),
-      'other_lang',
-      serializers.serialize(object.other_lang,
-          specifiedType: const FullType(List, const [const FullType(String)])),
     ];
     Object? value;
+    value = object.other_lang;
+    if (value != null) {
+      result
+        ..add('other_lang')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
     value = object.medical_office_id;
     if (value != null) {
       result
@@ -320,10 +321,10 @@ class _$PatientModelSerializer implements StructuredSerializer<PatientModel> {
               specifiedType: const FullType(String))! as String;
           break;
         case 'other_lang':
-          result.other_lang = serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(List, const [const FullType(String)]))!
-              as List<String>;
+          result.other_lang.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'medical_office_id':
           result.medical_office_id = serializers.deserialize(value,
@@ -470,7 +471,7 @@ class _$LegalprotectionModelSerializer
   }
 }
 
-class _$PatientresponseModel extends PatientresponseModel {
+class _$PatientResponse extends PatientResponse {
   @override
   final bool? success;
   @override
@@ -482,27 +483,25 @@ class _$PatientresponseModel extends PatientresponseModel {
   @override
   final PatientdataModel? data;
 
-  factory _$PatientresponseModel(
-          [void Function(PatientresponseModelBuilder)? updates]) =>
-      (new PatientresponseModelBuilder()..update(updates))._build();
+  factory _$PatientResponse([void Function(PatientResponseBuilder)? updates]) =>
+      (new PatientResponseBuilder()..update(updates))._build();
 
-  _$PatientresponseModel._(
+  _$PatientResponse._(
       {this.success, this.message, this.patient, this.patients, this.data})
       : super._();
 
   @override
-  PatientresponseModel rebuild(
-          void Function(PatientresponseModelBuilder) updates) =>
+  PatientResponse rebuild(void Function(PatientResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PatientresponseModelBuilder toBuilder() =>
-      new PatientresponseModelBuilder()..replace(this);
+  PatientResponseBuilder toBuilder() =>
+      new PatientResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is PatientresponseModel &&
+    return other is PatientResponse &&
         success == other.success &&
         message == other.message &&
         patient == other.patient &&
@@ -522,7 +521,7 @@ class _$PatientresponseModel extends PatientresponseModel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'PatientresponseModel')
+    return (newBuiltValueToStringHelper(r'PatientResponse')
           ..add('success', success)
           ..add('message', message)
           ..add('patient', patient)
@@ -532,9 +531,9 @@ class _$PatientresponseModel extends PatientresponseModel {
   }
 }
 
-class PatientresponseModelBuilder
-    implements Builder<PatientresponseModel, PatientresponseModelBuilder> {
-  _$PatientresponseModel? _$v;
+class PatientResponseBuilder
+    implements Builder<PatientResponse, PatientResponseBuilder> {
+  _$PatientResponse? _$v;
 
   bool? _success;
   bool? get success => _$this._success;
@@ -560,9 +559,9 @@ class PatientresponseModelBuilder
       _$this._data ??= new PatientdataModelBuilder();
   set data(PatientdataModelBuilder? data) => _$this._data = data;
 
-  PatientresponseModelBuilder();
+  PatientResponseBuilder();
 
-  PatientresponseModelBuilder get _$this {
+  PatientResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _success = $v.success;
@@ -576,24 +575,24 @@ class PatientresponseModelBuilder
   }
 
   @override
-  void replace(PatientresponseModel other) {
+  void replace(PatientResponse other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$PatientresponseModel;
+    _$v = other as _$PatientResponse;
   }
 
   @override
-  void update(void Function(PatientresponseModelBuilder)? updates) {
+  void update(void Function(PatientResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  PatientresponseModel build() => _build();
+  PatientResponse build() => _build();
 
-  _$PatientresponseModel _build() {
-    _$PatientresponseModel _$result;
+  _$PatientResponse _build() {
+    _$PatientResponse _$result;
     try {
       _$result = _$v ??
-          new _$PatientresponseModel._(
+          new _$PatientResponse._(
               success: success,
               message: message,
               patient: _patient?.build(),
@@ -610,7 +609,7 @@ class PatientresponseModelBuilder
         _data?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'PatientresponseModel', _$failedField, e.toString());
+            r'PatientResponse', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -726,7 +725,7 @@ class _$PatientModel extends PatientModel {
   @override
   final String main_lang;
   @override
-  final List<String> other_lang;
+  final BuiltList<String>? other_lang;
   @override
   final int? medical_office_id;
   @override
@@ -763,7 +762,7 @@ class _$PatientModel extends PatientModel {
       required this.phone,
       required this.email,
       required this.main_lang,
-      required this.other_lang,
+      this.other_lang,
       this.medical_office_id,
       this.life_wish,
       this.legal_protection,
@@ -788,8 +787,6 @@ class _$PatientModel extends PatientModel {
     BuiltValueNullFieldError.checkNotNull(email, r'PatientModel', 'email');
     BuiltValueNullFieldError.checkNotNull(
         main_lang, r'PatientModel', 'main_lang');
-    BuiltValueNullFieldError.checkNotNull(
-        other_lang, r'PatientModel', 'other_lang');
   }
 
   @override
@@ -927,9 +924,11 @@ class PatientModelBuilder
   String? get main_lang => _$this._main_lang;
   set main_lang(String? main_lang) => _$this._main_lang = main_lang;
 
-  List<String>? _other_lang;
-  List<String>? get other_lang => _$this._other_lang;
-  set other_lang(List<String>? other_lang) => _$this._other_lang = other_lang;
+  ListBuilder<String>? _other_lang;
+  ListBuilder<String> get other_lang =>
+      _$this._other_lang ??= new ListBuilder<String>();
+  set other_lang(ListBuilder<String>? other_lang) =>
+      _$this._other_lang = other_lang;
 
   int? _medical_office_id;
   int? get medical_office_id => _$this._medical_office_id;
@@ -999,7 +998,7 @@ class PatientModelBuilder
       _phone = $v.phone;
       _email = $v.email;
       _main_lang = $v.main_lang;
-      _other_lang = $v.other_lang;
+      _other_lang = $v.other_lang?.toBuilder();
       _medical_office_id = $v.medical_office_id;
       _life_wish = $v.life_wish?.toBuilder();
       _legal_protection = $v.legal_protection?.toBuilder();
@@ -1050,8 +1049,7 @@ class PatientModelBuilder
                   email, r'PatientModel', 'email'),
               main_lang: BuiltValueNullFieldError.checkNotNull(
                   main_lang, r'PatientModel', 'main_lang'),
-              other_lang: BuiltValueNullFieldError.checkNotNull(
-                  other_lang, r'PatientModel', 'other_lang'),
+              other_lang: _other_lang?.build(),
               medical_office_id: medical_office_id,
               life_wish: _life_wish?.build(),
               legal_protection: _legal_protection?.build(),
@@ -1067,6 +1065,9 @@ class PatientModelBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'other_lang';
+        _other_lang?.build();
+
         _$failedField = 'life_wish';
         _life_wish?.build();
         _$failedField = 'legal_protection';
