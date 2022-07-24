@@ -494,9 +494,11 @@ class _EditPatientState extends State<EditPatient> {
                           const SizedBox(
                             height: 15,
                           ),
-                          PrimaryButton(onTap: editPatient, loading: loading, text: 'Sauvegarder')
+
                         ],
                       ),
+                      const SizedBox(height: 15,),
+                      PrimaryButton(onTap: editPatient, loading: loading, text: 'Sauvegarder')
                     ],
                   ),
                 ),
