@@ -50,6 +50,17 @@ class _$Chopper_Api extends Chopper_Api {
   }
 
   @override
+  Future<Response<PatientResponse>> getPatient(int id, String token) {
+    final $url = 'patients/${id}';
+    final $headers = {
+      'Authorization': token,
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<PatientResponse, PatientResponse>($request);
+  }
+
+  @override
   Future<Response<OfficeConnectionResponse>> getConnOffice(
       int id, String token) {
     final $url = 'offices/${id}/connect';

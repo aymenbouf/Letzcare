@@ -9,6 +9,7 @@ import 'package:letzcqre/models/profile/built_me.dart';
 import 'package:letzcqre/network/built_value_converter.dart';
 import 'package:chopper/chopper.dart';
 import 'package:built_collection/built_collection.dart';
+
 part 'chopper_api.chopper.dart';
 
 @ChopperApi()
@@ -17,10 +18,16 @@ abstract class Chopper_Api extends ChopperService {
   Future<Response<MeModel>> getMe(@Header('Authorization') String token);
 
   @Get(path: 'my-offices')
-  Future<Response<MyofficesModel>> getMyOffices(@Header('Authorization') String token);
+  Future<Response<MyofficesModel>> getMyOffices(
+      @Header('Authorization') String token);
 
   @Get(path: 'patients')
-  Future<Response<PatientResponse>> getPatients(@Header('Authorization') String token);
+  Future<Response<PatientResponse>> getPatients(
+      @Header('Authorization') String token);
+
+  @Get(path: 'patients/{id}')
+  Future<Response<PatientResponse>> getPatient(
+      @Path('id') int id, @Header('Authorization') String token);
 
   @Post(path: 'offices/{id}/connect')
   Future<Response<OfficeConnectionResponse>> getConnOffice(
@@ -28,16 +35,15 @@ abstract class Chopper_Api extends ChopperService {
 
   @Post(path: 'offices/disconnect')
   Future<Response<OfficeConnectionResponse>> getDisConnOffice(
-       @Header('Authorization') String token);
+      @Header('Authorization') String token);
 
   @Post(path: 'logout')
-  Future<Response<LogoutModel>> logout(
-      @Header('Authorization') String token);
+  Future<Response<LogoutModel>> logout(@Header('Authorization') String token);
 
   @Post(path: 'login')
   Future<Response<LoginModel>> login(
-      @Body() AuthModel body,
-      );
+    @Body() AuthModel body,
+  );
 
   static Chopper_Api create() {
     final client = ChopperClient(

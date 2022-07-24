@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:letzcqre/components/PrimaryButton.dart';
 import 'package:letzcqre/components/loadingImage.dart';
 import 'package:letzcqre/constants.dart';
 import 'package:letzcqre/models/patient/built_patient.dart';
 import 'package:letzcqre/network/api.dart';
 import 'package:letzcqre/network/chopper_api.dart';
+import 'package:letzcqre/screens/editpatient.dart';
 import 'package:letzcqre/screens/offices.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,11 +112,22 @@ class _InOfficeScreenState extends State<InOfficeScreen> {
             onPressed: (BuildContext context) async {
               deletePatient(context, patientModel.id);
             },
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             icon: Icons.delete_outline_sharp,
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: "Supprimer",
+          ),
+          SlidableAction(
+            borderRadius: BorderRadius.circular(12),
+            onPressed: (context) async {
+              editPatient(context, patientModel.id);
+            },
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            icon: Icons.edit,
+            backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
+            label: "Modifier",
           ),
         ]),
         child: Container(
@@ -181,5 +192,9 @@ class _InOfficeScreenState extends State<InOfficeScreen> {
       await getPatients();
       setState(() {});
     }
+  }
+
+  void editPatient(BuildContext context, int id) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>EditPatient(patient_id: id)));
   }
 }
