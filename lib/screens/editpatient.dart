@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
+import '../network/api.dart';
 
 class EditPatient extends StatefulWidget {
   final int patient_id;
@@ -73,6 +74,7 @@ class _EditPatientState extends State<EditPatient> {
       birth_date = patient!.birth_date;
       main_lang = patient!.main_lang;
       selectedLangs = patient!.other_lang!.toList();
+      gender = patient!.gender;
     });
   }
 
@@ -456,6 +458,7 @@ class _EditPatientState extends State<EditPatient> {
                         height: 15,
                       ),
                       Row(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -491,14 +494,12 @@ class _EditPatientState extends State<EditPatient> {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 15,
-                          ),
 
                         ],
                       ),
                       const SizedBox(height: 15,),
-                      PrimaryButton(onTap: editPatient, loading: loading, text: 'Sauvegarder')
+                      PrimaryButton(onTap: editPatient, loading: loading, text: 'Sauvegarder'),
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 ),
@@ -511,7 +512,24 @@ class _EditPatientState extends State<EditPatient> {
       setState(() {
         loading = true;
       });
-      final editbody = PatientModel(
+      var data = jsonEncode({
+        'email' : email,
+        'phone':phone,
+        'first_name':first_name,
+        'last_name':last_name,
+        'birth_date':birth_date,
+        'other_lang':selectedLangs,
+        'nationality':nationality,
+        'main_lang':main_lang,
+        'gender':gender,
+        'biography':biography,
+        'profession':profession,
+        'marital_status':marital_status,
+        'care_status':care_status,
+        'religion':religion,
+        'personal_number':personal_number
+      });
+      /*final editbody = PatientModel(
             (b) => b
           ..email = email
           ..phone = phone
@@ -529,9 +547,10 @@ class _EditPatientState extends State<EditPatient> {
           ..religion = religion
           ..personal_number = personal_number,
 
-      );
-      var res = await Provider.of<Chopper_Api>(context,listen: false).EditPatient(widget.patient_id,editbody,'Bearer $token');
-      print(res.bodyString);
+      );*/
+      var res = await Network().putData(data, 'patients/${widget.patient_id}');
+      var body = jsonDecode(res.body);
+      print(body);
       if (res.statusCode == 202){
         setState(() {
           loading = false;
