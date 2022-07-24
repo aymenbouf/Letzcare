@@ -113,7 +113,7 @@ class _CheckAuthState extends State<CheckAuth> {
     if (isAuth!) {
       if (inOffice) {
         setState(() {
-          landingScreen = InOfficeScreen(office_id: office_id!);
+          landingScreen = const InOfficeScreen();
         });
 
       } else {

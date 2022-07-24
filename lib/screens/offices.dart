@@ -242,7 +242,7 @@ class _OfficesScreenState extends State<OfficesScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => InOfficeScreen(office_id: id)));
+              builder: (context) => const InOfficeScreen()));
     } else {
       Fluttertoast.showToast(
           msg: 'Vous n\'avez pas access', backgroundColor: primaryColor);

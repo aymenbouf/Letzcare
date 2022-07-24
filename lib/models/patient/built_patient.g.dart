@@ -163,8 +163,6 @@ class _$PatientModelSerializer implements StructuredSerializer<PatientModel> {
   Iterable<Object?> serialize(Serializers serializers, PatientModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'first_name',
       serializers.serialize(object.first_name,
           specifiedType: const FullType(String)),
@@ -185,6 +183,12 @@ class _$PatientModelSerializer implements StructuredSerializer<PatientModel> {
           specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.other_lang;
     if (value != null) {
       result
@@ -294,7 +298,7 @@ class _$PatientModelSerializer implements StructuredSerializer<PatientModel> {
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'first_name':
           result.first_name = serializers.deserialize(value,
@@ -711,7 +715,7 @@ class PatientdataModelBuilder
 
 class _$PatientModel extends PatientModel {
   @override
-  final int id;
+  final int? id;
   @override
   final String first_name;
   @override
@@ -755,7 +759,7 @@ class _$PatientModel extends PatientModel {
       (new PatientModelBuilder()..update(updates))._build();
 
   _$PatientModel._(
-      {required this.id,
+      {this.id,
       required this.first_name,
       required this.last_name,
       required this.personal_number,
@@ -776,7 +780,6 @@ class _$PatientModel extends PatientModel {
       this.care_status,
       this.biography})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, r'PatientModel', 'id');
     BuiltValueNullFieldError.checkNotNull(
         first_name, r'PatientModel', 'first_name');
     BuiltValueNullFieldError.checkNotNull(
@@ -1035,8 +1038,7 @@ class PatientModelBuilder
     try {
       _$result = _$v ??
           new _$PatientModel._(
-              id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'PatientModel', 'id'),
+              id: id,
               first_name: BuiltValueNullFieldError.checkNotNull(
                   first_name, r'PatientModel', 'first_name'),
               last_name: BuiltValueNullFieldError.checkNotNull(

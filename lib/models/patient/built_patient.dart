@@ -44,7 +44,7 @@ abstract class PatientdataModel implements Built<PatientdataModel, PatientdataMo
 
 abstract class PatientModel implements Built<PatientModel, PatientModelBuilder> {
   @BuiltValueField(wireName: 'id')
-  int get id;
+  int? get id;
   @BuiltValueField(wireName: 'first_name')
   String get first_name;
   @BuiltValueField(wireName: 'last_name')

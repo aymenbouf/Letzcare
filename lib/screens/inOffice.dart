@@ -12,9 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InOfficeScreen extends StatefulWidget {
-  final int office_id;
-
-  const InOfficeScreen({Key? key, required this.office_id}) : super(key: key);
+  const InOfficeScreen({Key? key}) : super(key: key);
 
   @override
   _InOfficeScreenState createState() => _InOfficeScreenState();
@@ -110,7 +108,7 @@ class _InOfficeScreenState extends State<InOfficeScreen> {
           SlidableAction(
             borderRadius: BorderRadius.circular(12),
             onPressed: (BuildContext context) async {
-              deletePatient(context, patientModel.id);
+              deletePatient(context, patientModel.id!);
             },
             padding: const EdgeInsets.symmetric(vertical: 5),
             icon: Icons.delete_outline_sharp,
@@ -121,7 +119,7 @@ class _InOfficeScreenState extends State<InOfficeScreen> {
           SlidableAction(
             borderRadius: BorderRadius.circular(12),
             onPressed: (context) async {
-              editPatient(context, patientModel.id);
+              editPatient(context, patientModel.id!);
             },
             padding: const EdgeInsets.symmetric(vertical: 5),
             icon: Icons.edit,

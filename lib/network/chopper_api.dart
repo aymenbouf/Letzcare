@@ -25,6 +25,12 @@ abstract class Chopper_Api extends ChopperService {
   Future<Response<PatientResponse>> getPatients(
       @Header('Authorization') String token);
 
+  @Put(path: 'patients/{id}')
+  Future<Response<PatientResponse>> EditPatient(
+      @Path('id') int id,
+      @Body() PatientModel body,
+      @Header('Authorization') String token);
+
   @Get(path: 'patients/{id}')
   Future<Response<PatientResponse>> getPatient(
       @Path('id') int id, @Header('Authorization') String token);
